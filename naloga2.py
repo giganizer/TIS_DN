@@ -30,8 +30,11 @@ def naloga2(vhod: list, nacin: int) -> tuple[list, float]:
 
     # Magic
     izhod = kodiranje_LZW(vhod) if nacin==0 else dekodiranje_LZW(vhod)
-    dolzina_vhod = len(vhod)*8 if nacin==0 else len(vhod)*12
-    dolzina_izhod = len(izhod)*12 if nacin==0 else len(izhod)*8
+    # V primeru dekodiranja pretvorimo izhod tako, da je vsak znak svoj element
+    if nacin:
+        izhod = list("".join(izhod))
+    dolzina_vhod = len(vhod)*8 if nacin==0 else len(izhod)*8
+    dolzina_izhod = len(izhod)*12 if nacin==0 else len(vhod)*12
     R = dolzina_vhod/dolzina_izhod
 
     return (izhod, R)
@@ -39,17 +42,17 @@ def naloga2(vhod: list, nacin: int) -> tuple[list, float]:
 def zacetni_slovar_ASCII_8b(mode):
     # Naredi zacetni slovar - 8-bitna ASCII tabela
     # -------------------------------------------------------------
-    # int mode: nacin - pove ali gradimo za dekodirnik ali kodirnik 
+    # int mode: nacin - pove ali gradimo za kodirnik ali dekodirnik 
     #           0: kodirnik ;; 1: dekodirnik
     #           * ce delamo za kodirnik, bodo kljuci nizi in vrednosti stevilke (kodne zamenjave)
-    #           * sicer (za dekodirnik) pa obratno
+    #           * sicer (za dekodirnik), pa obratno
     slovar = {}
     for i in range(256):
         slovar[chr(i) if mode==0 else i] = i if mode==0 else chr(i)
     return slovar
 
 def kodiranje_LZW(vhod: list):
-    # Inicializacija slovarja
+    # Inicializacija zacetnega slovarja
     slovar = zacetni_slovar_ASCII_8b(0)
     naslednji_indeks = 256
 
@@ -80,4 +83,30 @@ def kodiranje_LZW(vhod: list):
     return izhod
 
 def dekodiranje_LZW(vhod):
-    return None
+    # Inicializacija zacetnega slovarja
+    slovar = zacetni_slovar_ASCII_8b(1)
+    naslednji_indeks = 256
+
+    # Pomozne spremenljivke
+    indeks_vhoda = 0
+    izhod = []
+
+    # Dekodiranje
+    k = vhod[indeks_vhoda]
+    indeks_vhoda += 1
+    N = slovar[k]
+    izhod.append(N)
+    K = N
+    while indeks_vhoda < len(vhod):
+        k = vhod[indeks_vhoda]
+        indeks_vhoda += 1
+        if k in slovar:
+            N = slovar[k]
+        else:
+            N = K + K[0]
+        izhod.append(N)
+        slovar[naslednji_indeks] = K + N[0]
+        naslednji_indeks += 1
+        K = N
+
+    return izhod

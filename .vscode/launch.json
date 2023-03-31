@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "Python: Current File",
             "type": "python",
@@ -13,13 +14,22 @@
             "justMyCode": true
         }
         {
-            "name": "tis dn2 test primer 3",
+            "name": "[3] tis dn2 test primer 3",
             "type": "python",
             "request": "launch",
             "program": "test_naloga2.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": ["primeri","3"]
+        }
+        {
+            "name": "[4] tis dn2 test primer 4",
+            "type": "python",
+            "request": "launch",
+            "program": "test_naloga2.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["primeri","4"]
         }
     ]
 }
