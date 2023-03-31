@@ -30,9 +30,7 @@ def naloga2(vhod: list, nacin: int) -> tuple[list, float]:
 
     # Magic
     izhod = kodiranje_LZW(vhod) if nacin==0 else dekodiranje_LZW(vhod)
-    # V primeru dekodiranja pretvorimo izhod tako, da je vsak znak svoj element
-    if nacin:
-        izhod = list("".join(izhod))
+    
     dolzina_vhod = len(vhod)*8 if nacin==0 else len(izhod)*8
     dolzina_izhod = len(izhod)*12 if nacin==0 else len(vhod)*12
     R = dolzina_vhod/dolzina_izhod
@@ -110,4 +108,5 @@ def dekodiranje_LZW(vhod):
             naslednji_indeks += 1
         K = N
 
-    return izhod
+    # Izhod pretvorimo tako, da je vsak znak svoj element
+    return list("".join(izhod))
