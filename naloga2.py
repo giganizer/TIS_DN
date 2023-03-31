@@ -105,8 +105,9 @@ def dekodiranje_LZW(vhod):
         else:
             N = K + K[0]
         izhod.append(N)
-        slovar[naslednji_indeks] = K + N[0]
-        naslednji_indeks += 1
+        if naslednji_indeks < 4096:
+            slovar[naslednji_indeks] = K + N[0]
+            naslednji_indeks += 1
         K = N
 
     return izhod
