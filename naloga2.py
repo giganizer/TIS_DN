@@ -67,8 +67,10 @@ def kodiranje_LZW(vhod: list):
             buffer += 1
         else:
             izhod.append(slovar[N])
-            slovar[N+z] = naslednji_indeks
-            naslednji_indeks += 1
+            if(naslednji_indeks < 4096):
+                # Velikost slovarja omejimo na 2^12
+                slovar[N+z] = naslednji_indeks
+                naslednji_indeks += 1
             N = z
             indeks_vhoda += buffer + 1
             buffer = 0
