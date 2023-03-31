@@ -60,7 +60,7 @@ def kodiranje_LZW(vhod: list):
 
     # Kodiranje
     N = ""
-    while indeks_vhoda<len(vhod):
+    while indeks_vhoda+buffer<len(vhod):
         z = vhod[indeks_vhoda + buffer]
         if N+z in slovar:
             N = N+z
