@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
 
+
         {
             "name": "Python: Current File",
             "type": "python",
@@ -12,7 +13,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true
-        }
+        },
         {
             "name": "[3] tis dn2 test primer 3",
             "type": "python",
@@ -21,7 +22,7 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": ["primeri","3"]
-        }
+        },
         {
             "name": "[4] tis dn2 test primer 4",
             "type": "python",
@@ -30,6 +31,15 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": ["primeri","4"]
+        },
+        {
+            "name": "[ALICE] tis dn2 TEK",
+            "type": "python",
+            "request": "launch",
+            "program": "test_dn2_tek.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["./testni-nabor/alice29","./testiranje/izhod_alice.txt","0"]
         }
     ]
 }
